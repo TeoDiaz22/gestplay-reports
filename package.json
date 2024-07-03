@@ -14,6 +14,7 @@
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.15.21",
     "@mui/material": "^5.15.21",
+    "@tanstack/react-form": "^0.25.1",
     "bootstrap": "^5.3.3",
     "moment": "^2.30.1",
     "react": "^18.3.1",
