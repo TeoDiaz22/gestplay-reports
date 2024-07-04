@@ -1,27 +1,32 @@
-import Chart from "react-google-charts";
-import { formatDate } from "../../../utils/utils";
+import { AverangeErrorsByLevel } from "./charts-generals/AverangeErrorsByLevel";
+import { AverangePointsByLevel } from "./charts-generals/AverangePointsByLevel";
+import { AverangeTimeVsDate } from "./charts-generals/AverangeTimeVsDate";
+import { PointsByTime } from "./charts-levels/PointsByTime";
+import { TimeByDate } from "./charts-levels/TimeByDate";
+import { TimeVsPoints } from "./charts-levels/TimeVsPoints";
 
-export const StatsCharts = ({ stats }) => {
-    const data = [
-        ["Fecha","Tiempo"],
-    ];
+export const StatsCharts = ({ stats, isAllLevels }) => {
 
-    stats.map(stat => {
-        data.push([formatDate(stat.date_time), stat.elapsed_time]);
-    });
-
-    const options = {
-        title: "Tiempo por fecha",
-        legend: { position: "bottom" }
-    };
 
     return (
-        <Chart
-            chartType="LineChart"
-            width="100%"
-            height="400px"
-            data={data}
-            options={options}
-        />
+        <>
+            {isAllLevels ?
+                <>
+                    <h3>Estadisticas generales</h3>
+                    <div className="d-md-flex">
+                        <AverangeErrorsByLevel stats={stats} />
+                        <AverangePointsByLevel stats={stats} />
+                    </div>
+                    <AverangeTimeVsDate stats={stats} />
+                </>
+                :
+                <>
+                    <h3>Estadisticas por nivel</h3>
+                    <TimeByDate stats={stats} />
+                    <PointsByTime stats={stats} />
+                    <TimeVsPoints stats={stats} />
+                </>
+            }
+        </>
     );
 };
