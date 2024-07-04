@@ -1,13 +1,41 @@
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { Avatar, Box, Button, Grid, Link, TextField, InputAdornment, IconButton, InputLabel, OutlinedInput, FormControl } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import { Avatar, Box, Button, Grid, Link, TextField, InputAdornment, IconButton, InputLabel, OutlinedInput, FormControl, Collapse, Alert } from "@mui/material";
 import { useForm } from "@tanstack/react-form";
+import { useMutation } from '@tanstack/react-query';
 import { useState } from "react";
 import { Container } from "react-bootstrap";
+import { login } from './api/queries.';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
 export const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [open, setOpen] = useState(false);
+
+    const signIn = useSignIn();
+
+    const { mutate } = useMutation({
+        mutationFn: ({ email, password }) => login(email, password),
+        onSuccess: ({ data }) => {
+            signIn({
+                auth: {
+                    token: data.access_token,
+                    type: "Bearer"
+                },
+                userState: {
+                    id: '1',
+                },
+            });
+            window.location.href = '/profiles';
+        },
+        onError: (error) => {
+            if (error.response.status === 401) {
+                setOpen(true);
+            }
+        },
+    });
 
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -22,10 +50,36 @@ export const Login = () => {
         },
         onSubmit: async ({ value }) => {
             console.log(value);
+            mutate(value);
         },
     });
     return (
         <Container>
+            <div className='position-absolute top-0 end-0'>
+                <Box>
+                    <Collapse in={open}>
+                        <Alert
+                            variant="filled"
+                            severity="warning"
+                            action={
+                                <IconButton
+                                    aria-label="close"
+                                    color="inherit"
+                                    size="small"
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <CloseIcon fontSize="inherit" />
+                                </IconButton>
+                            }
+                            sx={{ mb: 2 }}
+                        >
+                            Contraseña o correo incorrecto
+                        </Alert>
+                    </Collapse>
+                </Box>
+            </div>
             <Box
                 sx={{
                     marginTop: 8,
@@ -66,7 +120,7 @@ export const Login = () => {
                         <Field
                             name="password"
                             children={({ state, handleChange, handleBlur, name }) => (
-                                <FormControl sx={{ width: 1}} variant="outlined">
+                                <FormControl sx={{ width: 1 }} variant="outlined">
                                     <InputLabel htmlFor="password">Contraseña</InputLabel>
                                     <OutlinedInput
                                         margin="none"
