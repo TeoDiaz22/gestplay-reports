@@ -34,6 +34,7 @@ export const AverangeTimeVsDate = ({ stats }) => {
 
 	const options = {
 		title: "Tiempo promedio por fecha y nivel",
+		curveType: "function",
 		legend: { position: "bottom" }
 	};
 
