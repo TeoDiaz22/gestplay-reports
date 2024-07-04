@@ -8,7 +8,7 @@ import { profiles } from "../../static/profiles.js";
 import ErrorIcon from '@mui/icons-material/Error';
 
 export const ProfileStats = () => {
-    const [levelId, setLevelId] = useState(1);
+    const [levelId, setLevelId] = useState(0);
     const [game, setGame] = useState(1);
     const [profileStats, setProfileStats] = useState([]);
     const [profileName, setProfileName] = useState();
@@ -18,12 +18,13 @@ export const ProfileStats = () => {
     useEffect(() => {
         if (game === 1) {
             const { game_data } = gameDataCursor[profileId];
-            setProfileStats(game_data[levelId]);
+            console.log(game_data)
+            levelId == 0 ? setProfileStats(getAllLevelsData(game_data)) : setProfileStats(game_data[levelId]);
         }
 
         if (game === 2) {
             const { game_data } = gameDataClick[profileId];
-            setProfileStats(game_data[levelId]);
+            levelId == 0 ? setProfileStats(getAllLevelsData(game_data)) : setProfileStats(game_data[levelId]);
         }
     }, [game, levelId]);
 
@@ -33,6 +34,14 @@ export const ProfileStats = () => {
         setProfileName(name);
         setProfileImage(image);
     }, []);
+
+    const getAllLevelsData = (gameData) => {
+        let allLevelsData = [];
+        for( const [key,value] of Object.entries(gameData)) {
+            allLevelsData.push(...value);
+        }
+        return allLevelsData
+    }
 
     console.log(profileId)
     console.log(profileStats)
@@ -61,6 +70,7 @@ export const ProfileStats = () => {
                             label="Nivel"
                             onChange={(event) => setLevelId(event.target.value)}
                         >
+                            <MenuItem value={0}>Todos</MenuItem>
                             <MenuItem value={1}>Nivel 1</MenuItem>
                             <MenuItem value={2}>Nivel 2</MenuItem>
                             <MenuItem value={3}>Nivel 3</MenuItem>
@@ -79,7 +89,7 @@ export const ProfileStats = () => {
                 para el nivel seleccionado</h1></> :
                 <>
                     <StatsTable stats={profileStats} />
-                    <StatsCharts stats={profileStats} />
+                    <StatsCharts stats={profileStats}  isAllLevels={levelId === 0}/>
                 </>
             }
         </>
