@@ -23,12 +23,18 @@ importers:
       '@tanstack/react-form':
         specifier: ^0.25.1
         version: 0.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tanstack/zod-form-adapter':
+        specifier: ^0.25.2
+        version: 0.25.2(zod@3.23.8)
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
       moment:
         specifier: ^2.30.1
         version: 2.30.1
+      prop-types:
+        specifier: ^15.8.1
+        version: 15.8.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -44,6 +50,9 @@ importers:
       react-router-dom:
         specifier: ^6.24.0
         version: 6.24.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      zod:
+        specifier: ^3.23.8
+        version: 3.23.8
     devDependencies:
       '@types/react':
         specifier: ^18.3.3
@@ -694,6 +703,9 @@ packages:
   '@tanstack/form-core@0.25.1':
     resolution: {integrity: sha512-dMeJigLGBvVdSvvh49X/xx6rvVbtgG7Gc1LBwOrgaNTKiTcqVtfRwhCLkGo0IHeFL/oInTSbdeAxF/DE8mmAqQ==}
 
+  '@tanstack/form-core@0.25.2':
+    resolution: {integrity: sha512-BWPCpl0buDa7xPaU2+Dp9SZ/+3J3nnwzk15JnbKxbuKSCvnCLKHxxifhN/nSifiCLs+14tNDBu0ueG9sU6VWGQ==}
+
   '@tanstack/react-form@0.25.1':
     resolution: {integrity: sha512-lWRUJDraOLk9N6JP2KXDlK7hseA+UGh03Q4/3IozZ0X7yxvV93mH5R2k20yfHuYRHpoUB8Vafz8EQgrl2FP2yw==}
     peerDependencies:
@@ -711,6 +723,11 @@ packages:
 
   '@tanstack/store@0.5.3':
     resolution: {integrity: sha512-bEITONJbnuUj37cIKusJH6tyRyg4kQP8thUr0Wq/gQ58dKirBGC0RaUykZXbQKr2WIJJ0q0XLoaY5Azf8y1RXw==}
+
+  '@tanstack/zod-form-adapter@0.25.2':
+    resolution: {integrity: sha512-zXU17eAh+wJd4JnwgYQZczI055r5EIMViausznSqp1vR2v5OvGuvqAX/aLR1lE2zUpk4e5U7Ds30PryoTf8H6w==}
+    peerDependencies:
+      zod: ^3.x
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -1870,6 +1887,9 @@ packages:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
     engines: {node: '>=10'}
 
+  zod@3.23.8:
+    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+
 snapshots:
 
   '@ampproject/remapping@2.3.0':
@@ -2486,6 +2506,10 @@ snapshots:
     dependencies:
       '@tanstack/store': 0.5.3
 
+  '@tanstack/form-core@0.25.2':
+    dependencies:
+      '@tanstack/store': 0.5.3
+
   '@tanstack/react-form@0.25.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@remix-run/node': 2.10.0
@@ -2505,6 +2529,11 @@ snapshots:
       use-sync-external-store: 1.2.2(react@18.3.1)
 
   '@tanstack/store@0.5.3': {}
+
+  '@tanstack/zod-form-adapter@0.25.2(zod@3.23.8)':
+    dependencies:
+      '@tanstack/form-core': 0.25.2
+      zod: 3.23.8
 
   '@types/babel__core@7.20.5':
     dependencies:
@@ -3875,3 +3904,5 @@ snapshots:
   yaml@1.10.2: {}
 
   yocto-queue@0.1.0: {}
+
+  zod@3.23.8: {}
