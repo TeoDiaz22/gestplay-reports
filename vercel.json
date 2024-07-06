@@ -1,28 +1,30 @@
 {
-    "rewrite": {
-        "source": "/(.*)",
-        "destination": "/"
-    },
-    "routes": [
-        {
-            "src": "/",
-            "dest": "/profiles"
-        },
-        {
-            "src": "/activate-account/:token*",
-            "dest": "/activate-account/:token*"
-        },
-        {
-            "src": "/login",
-            "dest": "/login"
-        },
-        {
-            "src": "/profiles",
-            "dest": "/profiles"
-        },
-        {
-            "src": "/profiles/:profileId*",
-            "dest": "/profiles/:profileId*"
-        }
-    ]
+	"rewrite": [
+		{
+			"source": "/(.*)",
+			"destination": "/"
+		}
+	],
+	"routes": [
+		{
+			"src": "/",
+			"dest": "/profiles"
+		},
+		{
+			"src": "/activate-account/:token*",
+			"dest": "/activate-account/:token*"
+		},
+		{
+			"src": "/login",
+			"dest": "/login"
+		},
+		{
+			"src": "/profiles",
+			"dest": "/profiles"
+		},
+		{
+			"src": "/profiles/:profileId*",
+			"dest": "/profiles/:profileId*"
+		}
+	]
 }
