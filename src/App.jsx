@@ -7,6 +7,7 @@ import { profiles } from './static/profiles';
 import RequireAuth from '@auth-kit/react-router/RequireAuth';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Header } from './components/Header';
+import { ActivateAccount } from './auth/ActivateAccount';
 
 const queryClient = new QueryClient();
 
@@ -17,6 +18,7 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path={"/login"} element={<Login />} />
+				<Route path={"/activate-account/:token"} element={<ActivateAccount />} />
 				<Route path={"/profiles"} element={
 					<RequireAuth fallbackPath={"/login"}>
 						<ProfileList profiles={profiles} />
