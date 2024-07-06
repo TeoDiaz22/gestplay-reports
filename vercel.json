@@ -1,12 +1,12 @@
 {
-    "rewrites": [
+    "routes": [
         {
             "source": "/",
             "destination": "/profiles"
         },
         {
-            "source": "/activate-account/:token",
-            "destination": "/activate-account/:token"
+            "source": "/activate-account/:token*",
+            "destination": "/activate-account/:token*"
         },
         {
             "source": "/login",
@@ -17,8 +17,8 @@
             "destination": "/profiles"
         },
         {
-            "source": "/profiles/:profileId",
-            "destination": "/profiles/:profileId"
+            "source": "/profiles/:profileId*",
+            "destination": "/profiles/:profileId*"
         }
     ]
 }
