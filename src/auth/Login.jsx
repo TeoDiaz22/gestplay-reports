@@ -9,9 +9,13 @@ import { Container } from "react-bootstrap";
 import { login } from './api/queries.';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 
+const PASSWORD_ERROR_MESSAGE = "Contraseña o correo incorrecto";
+const DEFAULT_ERROR_MESSAGE = "Ha ocurrido un error";
+
 export const Login = () => {
 
     const [showPassword, setShowPassword] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(DEFAULT_ERROR_MESSAGE)
     const [open, setOpen] = useState(false);
 
     const signIn = useSignIn();
@@ -32,6 +36,10 @@ export const Login = () => {
         },
         onError: (error) => {
             if (error.response.status === 401) {
+                setErrorMessage(PASSWORD_ERROR_MESSAGE);
+                setOpen(true);
+            }else{
+                setErrorMessage(DEFAULT_ERROR_MESSAGE);
                 setOpen(true);
             }
         },
