@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { StatsTable } from "./components/StatsTable";
 import { StatsCharts } from "./components/StatsCharts";
-import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Box, CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 import ErrorIcon from '@mui/icons-material/Error';
 import { Container } from "react-bootstrap";
@@ -27,14 +27,14 @@ export const ProfileStats = () => {
 
     useEffect(() => {
         if (game === 1) {
-            if (cursorGameQuery.isLoading || clickGameQuery.isLoading) return;
+            if (cursorGameQuery.isLoading || cursorGameQuery.isError) return;
             const game_data = cursorGameQuery.data.data;
             console.log(game_data)
             levelId == 0 ? setProfileStats(getAllLevelsData(game_data)) : setProfileStats(game_data[levelId]);
         }
 
         if (game === 2) {
-            if (cursorGameQuery.isLoading || clickGameQuery.isLoading) return;
+            if (clickGameQuery.isLoading || clickGameQuery.isError) return;
             const game_data = clickGameQuery.data.data;
             levelId == 0 ? setProfileStats(getAllLevelsData(game_data)) : setProfileStats(game_data[levelId]);
         }
@@ -45,7 +45,7 @@ export const ProfileStats = () => {
         const { name, last_name, image } = profileData.data.data;
         setProfileName(`${name} ${last_name}`);
         // setProfileImage(image);
-    }, [ profileData.isLoading, profileData.data]);
+    }, [profileData.isLoading, profileData.data]);
 
     const getAllLevelsData = (gameData) => {
         let allLevelsData = [];
@@ -61,7 +61,7 @@ export const ProfileStats = () => {
     return (
         <Container>
             <div className="d-flex">
-                <FormControl sx={{ display: 'inline' }}>
+                <FormControl sx={{ display: 'inline', mr: 2 }}>
                     <InputLabel id="game">Juego</InputLabel>
                     <Select
                         id="game"
@@ -97,12 +97,26 @@ export const ProfileStats = () => {
                     <h1>{profileName}</h1>
                 </span>
             </div>
-            {profileStats.length === 0 ? <><ErrorIcon htmlColor={'#F26A4B'} fontSize={"large"} /><h1>No existen registros
-                para el nivel seleccionado</h1></> :
-                <>
-                    <StatsTable stats={profileStats} />
-                    <StatsCharts stats={profileStats} isAllLevels={levelId === 0} />
-                </>
+            {
+                (cursorGameQuery.isLoading || clickGameQuery.isLoading)
+                    ? <div className="d-flex flex-column align-items-center">
+                        <CircularProgress className="m-5" color='primary' />
+                        <p>Cargando estadísticas...</p>
+                    </div>
+                    : (cursorGameQuery.isError || clickGameQuery.isError)
+                        ? <div className="d-flex flex-column align-items-center">
+                            <ErrorIcon htmlColor={'#F26A4B'} fontSize={"large"} />
+                            <h1>No se pudieron cargar las estadísticas</h1>
+                        </div>
+                        : profileStats.length === 0
+                            ? <div className="d-flex flex-column align-items-center">
+                                <ErrorIcon htmlColor={'#F26A4B'} fontSize={"large"} />
+                                <h1>No existen registros para el nivel seleccionado</h1>
+                            </div>
+                            : <>
+                                <StatsTable stats={profileStats} />
+                                <StatsCharts stats={profileStats} isAllLevels={levelId === 0} />
+                            </>
             }
         </Container>
     )
