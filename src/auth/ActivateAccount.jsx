@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { activateAccount } from "./api/queries.";
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from "react-router-dom";
+import { RedirectLogin } from "./components/RedirectLogin";
 
 export const ActivateAccount = () => {
 
@@ -84,15 +85,4 @@ export const ActivateAccount = () => {
             </Box>
         </Container>
     )
-};
-
-const RedirectLogin = () => {
-    const navigate = useNavigate();
-    const handleRedirect = () => navigate("/login");
-
-    return (
-        <>
-            Tu cuenta ha sido activada exitosamente. Por favor <a onClick={handleRedirect}>inicia sesion</a>
-        </>
-    );
 };
