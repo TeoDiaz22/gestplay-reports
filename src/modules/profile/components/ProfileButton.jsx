@@ -9,7 +9,7 @@ export const ProfileButton = ({ name, last_name, id, image }) => {
     const navigate = useNavigate();
 
     const handleClick = () => {
-        navigate(`/profile/${id}`);
+        navigate(`/profiles/${id}`);
     };
     
     return (
