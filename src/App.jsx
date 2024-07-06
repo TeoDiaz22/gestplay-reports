@@ -18,13 +18,13 @@ function App() {
 			<Header />
 			<Routes>
 				<Route path={"/login"} element={<Login />} />
-				<Route path={"/activate-account/:token"} element={<ActivateAccount />} />
-				<Route path={"/profiles"} element={
+				<Route path={"/"} exact element={
 					<RequireAuth fallbackPath={"/login"}>
 						<ProfileList profiles={profiles} />
 					</RequireAuth>
 				} />
-				<Route path={"/"} element={
+				<Route path={"/activate-account/:token"} element={<ActivateAccount />} />
+				<Route path={"/profiles"} element={
 					<RequireAuth fallbackPath={"/login"}>
 						<ProfileList profiles={profiles} />
 					</RequireAuth>

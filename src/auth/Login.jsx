@@ -9,6 +9,8 @@ import { Container } from "react-bootstrap";
 import { login } from './api/queries.';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { useNavigate } from 'react-router-dom';
+import useIsAuthenticated from 'react-auth-kit/hooks/useIsAuthenticated';
+import { useEffect } from 'react';
 
 const PASSWORD_ERROR_MESSAGE = "Contraseña o correo incorrecto";
 const DEFAULT_ERROR_MESSAGE = "Ha ocurrido un error";
@@ -20,7 +22,10 @@ export const Login = () => {
     const [open, setOpen] = useState(false);
 
     const signIn = useSignIn();
+    const isAuthenticated = useIsAuthenticated();
     const navigate = useNavigate();
+
+    useEffect(() => { if (isAuthenticated) navigate("/profiles") }, []);
 
     const { mutate, isPending } = useMutation({
         mutationFn: ({ email, password }) => login(email, password),
@@ -159,7 +164,7 @@ export const Login = () => {
                                 </FormControl>
                             )}
                         />
-                        <Box sx={{ mt:2 ,position: 'relative' }}>
+                        <Box sx={{ mt: 2, position: 'relative' }}>
                             <Button
                                 type="submit"
                                 fullWidth

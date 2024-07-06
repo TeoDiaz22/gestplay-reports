@@ -5,13 +5,15 @@ import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { activateAccount } from "./api/queries.";
 import EmailIcon from '@mui/icons-material/Email';
+import { useNavigate } from "react-router-dom";
 
 export const ActivateAccount = () => {
 
     const isAuthenticated = useIsAuthenticated();
     const { token } = useParams();
+    const navigate = useNavigate();
 
-    if (isAuthenticated) window.location.href = '/profiles';
+    if (isAuthenticated) navigate("/profiles");
 
     const { mutate, isPending, isSuccess, isError } = useMutation({
         mutationFn: () => activateAccount(token),
@@ -38,20 +40,23 @@ export const ActivateAccount = () => {
             <Box className="d-flex flex-column justify-content-center align-items-center bg-light p-5 rounded">
                 {
                     isSuccess
-                        ? <EmailIcon htmlColor={'#0CDB7A'} fontSize={"large"} />
+                        ? <>
+                            <EmailIcon htmlColor={'#0CDB7A'} fontSize={"large"} />
+                            <h3>¡Gracias por registrarte!</h3>
+                            <RedirectLogin />
+                        </>
                         : isError
-                            ? <EmailIcon htmlColor={'#F26A4B'} fontSize={"large"} />
-                            : <EmailIcon htmlColor={'#251959'} fontSize={"large"} />
+                            ? <>
+                                <EmailIcon htmlColor={'#F26A4B'} fontSize={"large"} />
+                                <h3>¡Ha ocurrido un error!</h3>
+                                <span>Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo.</span>
+                            </>
+                            : <>
+                                <EmailIcon htmlColor={'#251959'} fontSize={"large"} />
+                                <h3>¡Gracias por registrarte!</h3>
+                                <span>Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo.</span>
+                            </>
                 }
-                <h3>¡Gracias por registrarte!</h3>
-                <span>
-                    {isSuccess
-                        ? <RedirectLogin />
-                        : isError
-                            ? "Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo."
-                            : "Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo."
-                    }
-                </span>
                 <Box sx={{ m: 1, position: 'relative' }}>
                     <Button
                         type="submit"
@@ -82,9 +87,12 @@ export const ActivateAccount = () => {
 };
 
 const RedirectLogin = () => {
+    const navigate = useNavigate();
+    const handleRedirect = () => navigate("/login");
+
     return (
         <>
-            Tu cuenta ha sido activada exitosamente. Por favor <a href="/login">inicia sesion</a>
+            Tu cuenta ha sido activada exitosamente. Por favor <a onClick={handleRedirect}>inicia sesion</a>
         </>
     );
 };
