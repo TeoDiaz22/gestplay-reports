@@ -1,0 +1,24 @@
+{
+    "rewrites": [
+        {
+            "source": "/",
+            "destination": "/profiles"
+        },
+        {
+            "source": "/activate-account/:token",
+            "destination": "/activate-account/:token"
+        },
+        {
+            "source": "/login",
+            "destination": "/login"
+        },
+        {
+            "source": "/profiles",
+            "destination": "/profiles"
+        },
+        {
+            "source": "/profiles/:profileId",
+            "destination": "/profiles/:profileId"
+        }
+    ]
+}
