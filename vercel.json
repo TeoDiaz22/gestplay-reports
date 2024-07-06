@@ -1,24 +1,24 @@
 {
     "routes": [
         {
-            "source": "/",
-            "destination": "/profiles"
+            "src": "/",
+            "dest": "/profiles"
         },
         {
-            "source": "/activate-account/:token*",
-            "destination": "/activate-account/:token*"
+            "src": "/activate-account/:token*",
+            "dest": "/activate-account/:token*"
         },
         {
-            "source": "/login",
-            "destination": "/login"
+            "src": "/login",
+            "dest": "/login"
         },
         {
-            "source": "/profiles",
-            "destination": "/profiles"
+            "src": "/profiles",
+            "dest": "/profiles"
         },
         {
-            "source": "/profiles/:profileId*",
-            "destination": "/profiles/:profileId*"
+            "src": "/profiles/:profileId*",
+            "dest": "/profiles/:profileId*"
         }
     ]
 }
