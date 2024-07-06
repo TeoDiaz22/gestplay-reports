@@ -40,20 +40,23 @@ export const ActivateAccount = () => {
             <Box className="d-flex flex-column justify-content-center align-items-center bg-light p-5 rounded">
                 {
                     isSuccess
-                        ? <EmailIcon htmlColor={'#0CDB7A'} fontSize={"large"} />
+                        ? <>
+                            <EmailIcon htmlColor={'#0CDB7A'} fontSize={"large"} />
+                            <h3>¡Gracias por registrarte!</h3>
+                            <RedirectLogin />
+                        </>
                         : isError
-                            ? <EmailIcon htmlColor={'#F26A4B'} fontSize={"large"} />
-                            : <EmailIcon htmlColor={'#251959'} fontSize={"large"} />
+                            ? <>
+                                <EmailIcon htmlColor={'#F26A4B'} fontSize={"large"} />
+                                <h3>¡Ha ocurrido un error!</h3>
+                                <span>"Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo."</span>
+                            </>
+                            : <>
+                                <EmailIcon htmlColor={'#251959'} fontSize={"large"} />
+                                <h3>¡Gracias por registrarte!</h3>
+                                <span>"Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo."</span>
+                            </>
                 }
-                <h3>¡Gracias por registrarte!</h3>
-                <span>
-                    {isSuccess
-                        ? <RedirectLogin />
-                        : isError
-                            ? "Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo."
-                            : "Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo."
-                    }
-                </span>
                 <Box sx={{ m: 1, position: 'relative' }}>
                     <Button
                         type="submit"
