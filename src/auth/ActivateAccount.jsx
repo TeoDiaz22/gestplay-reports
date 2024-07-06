@@ -7,12 +7,11 @@ import { activateAccount } from "./api/queries.";
 import EmailIcon from '@mui/icons-material/Email';
 import { useNavigate } from "react-router-dom";
 
-const navigate = useNavigate();
-
 export const ActivateAccount = () => {
 
     const isAuthenticated = useIsAuthenticated();
     const { token } = useParams();
+    const navigate = useNavigate();
 
     if (isAuthenticated) navigate("/profiles");
 
@@ -85,6 +84,7 @@ export const ActivateAccount = () => {
 };
 
 const RedirectLogin = () => {
+    const navigate = useNavigate();
     const handleRedirect = () => navigate("/login");
 
     return (
