@@ -20,7 +20,6 @@
     "@tanstack/zod-form-adapter": "^0.25.2",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
-    "dotenv": "^16.4.5",
     "moment": "^2.30.1",
     "prop-types": "^15.8.1",
     "react": "^18.3.1",
