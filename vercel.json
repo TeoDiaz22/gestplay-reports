@@ -1,0 +1,8 @@
+{
+    "rewrites": [
+        {
+            "source": "/activate-account/:token*",
+            "destination": "/activate-account/:token*"
+        }
+    ]
+}
