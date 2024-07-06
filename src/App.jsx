@@ -23,7 +23,7 @@ function App() {
 						<ProfileList profiles={profiles} />
 					</RequireAuth>
 				} />
-				<Route path={"/activate-account/:token"} element={<ActivateAccount />} />
+				<Route path={"/activate-account/:token"} exact element={<ActivateAccount />} />
 				<Route path={"/profiles"} element={
 					<RequireAuth fallbackPath={"/login"}>
 						<ProfileList profiles={profiles} />
