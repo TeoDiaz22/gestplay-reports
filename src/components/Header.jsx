@@ -20,7 +20,7 @@ export const Header = () => {
 
     return (
         <header>
-            <Container>
+            <Container className="py-3">
                 <Row className="align-items-center justify-content-between">
                     <div className="d-flex align-items-center justify-content-center w-100 position-relative">
                         <div className="mx-auto">
@@ -30,7 +30,7 @@ export const Header = () => {
                         {isAuthenticated ?
                             <div className="position-absolute end-0">
                                 <IconButton className="d-flex align-items-center" onClick={handleSignOut}>
-                                    <span className="fw-semibold p-2">Cerrar Sesión</span>
+                                    <span className="fw-semibold p-2 d-none d-lg-block">Cerrar Sesión</span>
                                     <LogoutIcon className="" />
                                 </IconButton>
                             </div>
