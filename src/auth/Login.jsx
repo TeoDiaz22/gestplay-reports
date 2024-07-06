@@ -1,13 +1,14 @@
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import CloseIcon from '@mui/icons-material/Close';
-import { Avatar, Box, Button, Grid, Link, TextField, InputAdornment, IconButton, InputLabel, OutlinedInput, FormControl, Collapse, Alert } from "@mui/material";
+import { Avatar, Box, Button, Grid, Link, TextField, InputAdornment, IconButton, InputLabel, OutlinedInput, FormControl, Collapse, Alert, CircularProgress } from "@mui/material";
 import { useForm } from "@tanstack/react-form";
 import { useMutation } from '@tanstack/react-query';
 import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { login } from './api/queries.';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import { useNavigate } from 'react-router-dom';
 
 const PASSWORD_ERROR_MESSAGE = "Contraseña o correo incorrecto";
 const DEFAULT_ERROR_MESSAGE = "Ha ocurrido un error";
@@ -19,8 +20,9 @@ export const Login = () => {
     const [open, setOpen] = useState(false);
 
     const signIn = useSignIn();
+    const navigate = useNavigate();
 
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: ({ email, password }) => login(email, password),
         onSuccess: ({ data }) => {
             signIn({
@@ -32,13 +34,13 @@ export const Login = () => {
                     id: '1',
                 },
             });
-            window.location.href = '/profiles';
+            navigate("/profiles");
         },
         onError: (error) => {
             if (error.response.status === 401) {
                 setErrorMessage(PASSWORD_ERROR_MESSAGE);
                 setOpen(true);
-            }else{
+            } else {
                 setErrorMessage(DEFAULT_ERROR_MESSAGE);
                 setOpen(true);
             }
@@ -83,7 +85,7 @@ export const Login = () => {
                             }
                             sx={{ mb: 2 }}
                         >
-                            Contraseña o correo incorrecto
+                            {errorMessage}
                         </Alert>
                     </Collapse>
                 </Box>
@@ -157,20 +159,30 @@ export const Login = () => {
                                 </FormControl>
                             )}
                         />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
-                        >
-                            Iniciar sesion
-                        </Button>
+                        <Box sx={{ mt:2 ,position: 'relative' }}>
+                            <Button
+                                type="submit"
+                                fullWidth
+                                variant="contained"
+                                disabled={isPending}
+                            >
+                                Iniciar sesion
+                            </Button>
+                            {isPending && (
+                                <CircularProgress
+                                    size={24}
+                                    sx={{
+                                        color: '#251959',
+                                        position: 'absolute',
+                                        top: '50%',
+                                        left: '50%',
+                                        marginTop: '-12px',
+                                        marginLeft: '-12px',
+                                    }}
+                                />
+                            )}
+                        </Box>
                     </form>
-                    <Grid item xs>
-                        <Link href="#" variant="body2">
-                            {"Olvidaste tu contraseña?"}
-                        </Link>
-                    </Grid>
                 </Box>
             </Box>
         </Container>
