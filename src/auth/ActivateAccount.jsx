@@ -49,12 +49,12 @@ export const ActivateAccount = () => {
                             ? <>
                                 <EmailIcon htmlColor={'#F26A4B'} fontSize={"large"} />
                                 <h3>¡Ha ocurrido un error!</h3>
-                                <span>"Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo."</span>
+                                <span>Ha ocurrido un error al activar tu cuenta. Por favor intenta de nuevo.</span>
                             </>
                             : <>
                                 <EmailIcon htmlColor={'#251959'} fontSize={"large"} />
                                 <h3>¡Gracias por registrarte!</h3>
-                                <span>"Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo."</span>
+                                <span>Para completar el proceso de activación de tu cuenta, por favor haz clic en el botón de abajo.</span>
                             </>
                 }
                 <Box sx={{ m: 1, position: 'relative' }}>
