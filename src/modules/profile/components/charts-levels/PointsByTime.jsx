@@ -1,5 +1,6 @@
 import { formatDate } from "../../../../utils/utils";
 import { Chart } from "react-google-charts";
+import { colors } from "@mui/material";
 
 export const PointsByTime = ({ stats }) => {
     
@@ -13,7 +14,8 @@ export const PointsByTime = ({ stats }) => {
 
     const options = {
         title: "Puntuacion obtenida en el nivel por fecha",
-        legend: { position: "bottom" }
+        legend: { position: "bottom" },
+        colors: ["#F26A4B"],
     };
   
     return (

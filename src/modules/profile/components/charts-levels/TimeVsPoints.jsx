@@ -1,4 +1,5 @@
 import Chart from "react-google-charts";
+import { colors } from "@mui/material";
 
 export const TimeVsPoints = ({ stats }) => {
   
@@ -14,6 +15,7 @@ export const TimeVsPoints = ({ stats }) => {
         },
         hAxis: {title: 'Tiempo para completar el nivel (s)'},
         vAxis: {title: 'Puntuación'},
+        colors: ["#F26A4B"], 
     };
   
     return (
