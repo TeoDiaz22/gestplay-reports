@@ -2,3 +2,11 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: #F6EEDE;
 }
+
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%; /* Puedes ajustar el ancho según tus necesidades */
+    margin: 0 auto; /* Centrar horizontalmente */
+}

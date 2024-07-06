@@ -1,23 +1,37 @@
-import {List, ListItemButton, ListItemText, ListSubheader } from "@mui/material";
+import { Box, List, ListSubheader } from "@mui/material";
 import { Container } from "react-bootstrap";
 import { ProfileButton } from "./components/ProfileButton";
+import { useQuery } from "@tanstack/react-query";
+import { getProfiles } from "../../api/queries";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
-export const ProfileList = ({ profiles }) => {
+export const ProfileList = () => {
+
+	const authHeader = useAuthHeader();
+
+	const { isPending, isError, data, error } = useQuery({
+		queryKey: ['profiles'],
+		queryFn: () => getProfiles(authHeader),
+	});
+
 	return (
-		<Container>
+		<Box className="profile-list">
+			{isPending ? <p>Cargando...</p> :
 			<List
 				subheader={
 					<ListSubheader component="div">
-						Perfiles
+						<h1 className="p-3">Perfiles</h1>
 					</ListSubheader>
 				}
+				sx={{width: '100%', bgcolor: 'background.paper'}}
 			>
 				{
-					profiles.values.map(profile => (
+					data.data.map(profile => (
 						<ProfileButton key={profile.id} {...profile} />
 					))
 				}
 			</List>
-		</Container>
+			}
+		</Box>
 	);
 };
