@@ -3,17 +3,17 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { ProfileStats } from "../ProfileStats";
 
 
-export const ProfileButton = ({ name, id, image }) => {
+export const ProfileButton = ({ name, last_name, id, image }) => {
 
     const handleClick = () => {
         console.log(`Profile ${id} clicked`);
     };
     return (
-        <ListItemButton onClick={handleClick} href={`/profile/${id}`}>
+        <ListItemButton onClick={handleClick} href={`/profiles/${id}`}>
             <ListItemIcon>
                 <AccountCircleIcon />
             </ListItemIcon>
-            <ListItemText primary={name} />
+            <ListItemText primary={`${name} ${last_name}`} />
         </ListItemButton>
     )
 }
