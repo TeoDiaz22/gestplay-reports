@@ -5,13 +5,16 @@ import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { activateAccount } from "./api/queries.";
 import EmailIcon from '@mui/icons-material/Email';
+import { useNavigate } from "react-router-dom";
+
+const navigate = useNavigate();
 
 export const ActivateAccount = () => {
 
     const isAuthenticated = useIsAuthenticated();
     const { token } = useParams();
 
-    if (isAuthenticated) window.location.href = '/profiles';
+    if (isAuthenticated) navigate("/profiles");
 
     const { mutate, isPending, isSuccess, isError } = useMutation({
         mutationFn: () => activateAccount(token),
@@ -82,9 +85,11 @@ export const ActivateAccount = () => {
 };
 
 const RedirectLogin = () => {
+    const handleRedirect = () => navigate("/login");
+
     return (
         <>
-            Tu cuenta ha sido activada exitosamente. Por favor <a href="/login">inicia sesion</a>
+            Tu cuenta ha sido activada exitosamente. Por favor <a onClick={handleRedirect}>inicia sesion</a>
         </>
     );
 };
