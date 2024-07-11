@@ -4,7 +4,7 @@ import { ProfileStats } from "../ProfileStats";
 import { useNavigate } from "react-router-dom";
 
 
-export const ProfileButton = ({ name, last_name, id, image }) => {
+export const ProfileButton = ({ first_name, last_name, id, image_path }) => {
 
     const navigate = useNavigate();
 
@@ -15,9 +15,9 @@ export const ProfileButton = ({ name, last_name, id, image }) => {
     return (
         <ListItemButton onClick={handleClick}>
             <ListItemIcon>
-                <AccountCircleIcon />
+                <img src={image_path} alt="imagen de perfil" style={{ width: 35, height: 35, borderRadius: '50%' }} />
             </ListItemIcon>
-            <ListItemText primary={`${name} ${last_name}`} />
+            <ListItemText primary={`${first_name} ${last_name}`} />
         </ListItemButton>
     )
 }
