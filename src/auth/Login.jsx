@@ -33,10 +33,7 @@ export const Login = () => {
             signIn({
                 auth: {
                     token: data.access_token,
-                    type: "Bearer"
-                },
-                userState: {
-                    id: '1',
+                    type: "Bearer",
                 },
             });
             navigate("/profiles");
@@ -64,7 +61,6 @@ export const Login = () => {
             password: '',
         },
         onSubmit: async ({ value }) => {
-            console.log(value);
             mutate(value);
         },
     });

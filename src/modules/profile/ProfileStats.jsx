@@ -29,7 +29,6 @@ export const ProfileStats = () => {
         if (game === 1) {
             if (cursorGameQuery.isLoading || cursorGameQuery.isError) return;
             const game_data = cursorGameQuery.data.data;
-            console.log(game_data)
             levelId == 0 ? setProfileStats(getAllLevelsData(game_data)) : setProfileStats(game_data[levelId]);
         }
 
@@ -54,9 +53,6 @@ export const ProfileStats = () => {
         }
         return allLevelsData
     }
-
-    console.log(profileId)
-    console.log(profileStats)
 
     return (
         <Container>

@@ -6,16 +6,27 @@ import { IconButton } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import useSignOut from "react-auth-kit/hooks/useSignOut";
 import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "../auth/api/queries.";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 export const Header = () => {
 
     const isAuthenticated = useIsAuthenticated();
     const signOut = useSignOut();
     const navigate = useNavigate();
+    const authHeader = useAuthHeader();
+
+    const { mutate } = useMutation({
+        mutationFn: (authHeader) => logout(authHeader),
+        onSuccess: () => {
+            signOut();
+            navigate('/login');
+        },
+    });
 
     const handleSignOut = () => {
-        signOut();
-        navigate('/login');
+        mutate(authHeader);
     };
 
     return (
