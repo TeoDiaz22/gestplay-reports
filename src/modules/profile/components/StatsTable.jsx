@@ -28,7 +28,14 @@ export const StatsTable = ({ stats }) => {
     };
 
     return (
-        <TableContainer component={Paper}>
+        <TableContainer 
+            component={Paper}
+            sx={{
+                my: 2,
+                boxShadow: 2,
+                borderRadius: 2,
+            }}
+        >
             <Table>
                 <TableHead>
                     <TableRow>

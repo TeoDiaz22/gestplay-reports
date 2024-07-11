@@ -1,6 +1,6 @@
 import { formatDate } from "../../../../utils/utils";
 import { Chart } from "react-google-charts";
-import { colors } from "@mui/material";
+import { Box, colors } from "@mui/material";
 
 export const TimeByDate = ({ stats }) => {
 
@@ -15,11 +15,21 @@ export const TimeByDate = ({ stats }) => {
     const options = {
         title: "Tiempo para completar el nivel por fecha",
         legend: { position: "bottom" },
-        colors: ["#0CDB7A"], 
+        colors: ["#0CDB7A"],
     };
 
     return (
-        <>
+        <Box
+            sx={{
+                width: "100%",
+                height: "425px",
+                backgroundColor: "#fff",
+                borderRadius: 2,
+                p: 2,
+                my: 2,
+                boxShadow: 2,
+            }}
+        >
             <Chart
                 chartType="LineChart"
                 width="100%"
@@ -27,6 +37,6 @@ export const TimeByDate = ({ stats }) => {
                 data={data}
                 options={options}
             />
-        </>
+        </Box>
     );
 }

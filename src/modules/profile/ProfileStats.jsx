@@ -42,9 +42,9 @@ export const ProfileStats = () => {
 
     useEffect(() => {
         if (profileData.isLoading) return;
-        const { name, last_name, image } = profileData.data.data;
-        setProfileName(`${name} ${last_name}`);
-        // setProfileImage(image);
+        const { first_name, last_name, image_path } = profileData.data.data;
+        setProfileName(`${first_name} ${last_name}`);
+        setProfileImage(image_path);
     }, [profileData.isLoading, profileData.data]);
 
     const getAllLevelsData = (gameData) => {
@@ -94,7 +94,10 @@ export const ProfileStats = () => {
                     </Select>
                 </FormControl>
                 <span className={"ms-auto"}>
-                    <h1>{profileName}</h1>
+                    <h1>
+                        {profileName}
+                        <img src={profileImage} alt="imagen de perfil" style={{ width: 50, height: 50, borderRadius: '50%' }} className="mx-3"/> 
+                    </h1>
                 </span>
             </div>
             {
