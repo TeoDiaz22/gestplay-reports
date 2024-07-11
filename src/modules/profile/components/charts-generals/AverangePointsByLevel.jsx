@@ -1,4 +1,4 @@
-import { colors } from "@mui/material";
+import { Box, colors } from "@mui/material";
 import Chart from "react-google-charts";
 
 
@@ -29,12 +29,24 @@ export const AverangePointsByLevel = ({ stats }) => {
     };
 
     return (
-        <Chart
-            chartType="Bar"
-            width={"100%"}
-            height={"400px"}
-            data={data}
-            options={options}
-        />
+        <Box
+            sx={{
+                width: "100%",
+                height: "425px",
+                backgroundColor: "#fff",
+                borderRadius: 2,
+                p: 2,
+                ml:2,
+                boxShadow: 2,
+            }}
+        >
+            <Chart
+                chartType="Bar"
+                width={"100%"}
+                height={"400px"}
+                data={data}
+                options={options}
+            />
+        </Box>
   )
 }

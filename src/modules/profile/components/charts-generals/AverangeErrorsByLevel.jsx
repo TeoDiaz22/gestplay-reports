@@ -1,4 +1,4 @@
-import { colors } from "@mui/material";
+import { Box, colors } from "@mui/material";
 import { useState } from "react"
 import Chart from "react-google-charts";
 
@@ -28,16 +28,28 @@ export const AverangeErrorsByLevel = ({ stats }) => {
             title: "Errores promedio por nivel",
             legend: { position: "bottom" }
         },
-        colors: ["#F26A4B"], 
+        colors: ["#F26A4B"],
     };
 
     return (
-        <Chart
-            chartType="Bar"
-            width={"100%"}
-            height={"400px"}
-            data={data}
-            options={options}
-        />
+        <Box
+            sx={{
+                width: "100%",
+                height: "425px",
+                backgroundColor: "#fff",
+                borderRadius: 2,
+                p: 2,
+                mr:2,
+                boxShadow: 2,
+            }}
+        >
+            <Chart
+                chartType="Bar"
+                width={"100%"}
+                height={"400px"}
+                data={data}
+                options={options}
+            />
+        </Box>
     )
 }

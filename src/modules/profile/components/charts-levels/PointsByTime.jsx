@@ -1,9 +1,9 @@
 import { formatDate } from "../../../../utils/utils";
 import { Chart } from "react-google-charts";
-import { colors } from "@mui/material";
+import { Box, colors } from "@mui/material";
 
 export const PointsByTime = ({ stats }) => {
-    
+
     const data = [
         ["Fecha", "Puntuación"],
     ];
@@ -17,14 +17,26 @@ export const PointsByTime = ({ stats }) => {
         legend: { position: "bottom" },
         colors: ["#F26A4B"],
     };
-  
+
     return (
-    <Chart
-        chartType="LineChart"
-        width="100%"
-        height="400px"
-        data={data}
-        options={options}
-    />
-  )
+        <Box
+            sx={{
+                width: "100%",
+                height: "425px",
+                backgroundColor: "#fff",
+                borderRadius: 2,
+                p: 2,
+                my: 4,
+                boxShadow: 2,
+            }}
+        >
+            <Chart
+                chartType="LineChart"
+                width="100%"
+                height="400px"
+                data={data}
+                options={options}
+            />
+        </Box>
+    )
 }
