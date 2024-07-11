@@ -61,7 +61,6 @@ export const Login = () => {
             password: '',
         },
         onSubmit: async ({ value }) => {
-            console.log(value);
             mutate(value);
         },
     });
