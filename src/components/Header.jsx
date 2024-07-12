@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { logout } from "../auth/api/queries.";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
 
@@ -35,8 +36,10 @@ export const Header = () => {
                 <Row className="align-items-center justify-content-between">
                     <div className="d-flex align-items-center justify-content-center w-100 position-relative">
                         <div className="mx-auto">
-                            <img src={GestplayLogo} alt="Gestplay Logo" height={80} className="mb-3" />
-                            <img src={GestplayTitle} alt="Gestplay Titulo" height={100} />
+                            <Link to="/">
+                                <img src={GestplayLogo} alt="Gestplay Logo" height={80} className="mb-3" />
+                                <img src={GestplayTitle} alt="Gestplay Titulo" height={100} />
+                            </Link>
                         </div>
                         {isAuthenticated ?
                             <div className="position-absolute end-0">
