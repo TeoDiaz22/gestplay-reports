@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
 import { StatsTable } from "./components/StatsTable";
 import { StatsCharts } from "./components/StatsCharts";
-import { Box, CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 import ErrorIcon from '@mui/icons-material/Error';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Container } from "react-bootstrap";
 import { getClickGameData, getCursorGameData, getProfile } from "../../api/queries.js";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 export const ProfileStats = () => {
     const [levelId, setLevelId] = useState(0);
@@ -15,11 +17,9 @@ export const ProfileStats = () => {
     const [profileStats, setProfileStats] = useState([]);
     const [profileName, setProfileName] = useState("");
     const [profileImage, setProfileImage] = useState("");
-    const [gameDataCursor, setGameDataCursor] = useState({});
-    const [gameDataClick, setGameDataClick] = useState({});
     const { profileId } = useParams();
-
     const authHeader = useAuthHeader();
+    const navigate = useNavigate();
 
     const cursorGameQuery = useQuery({ queryKey: ['cursorGameData'], queryFn: () => getCursorGameData(profileId, authHeader), });
     const clickGameQuery = useQuery({ queryKey: ['clickGameData'], queryFn: () => getClickGameData(profileId, authHeader) });
@@ -54,9 +54,18 @@ export const ProfileStats = () => {
         return allLevelsData
     }
 
+    const handleBack = () => navigate("/profiles");
+
     return (
         <Container>
             <div className="d-flex">
+                <Button
+                    onClick={handleBack}
+                    startIcon={<ArrowBackIcon />}
+                    sx={{ fontSize: 20, fontWeight: "medium", mr: 2, textTransform: "capitalize" }}
+                >
+                    Perfiles
+                </Button>
                 <FormControl sx={{ display: 'inline', mr: 2 }}>
                     <InputLabel id="game">Juego</InputLabel>
                     <Select
@@ -92,7 +101,7 @@ export const ProfileStats = () => {
                 <span className={"ms-auto"}>
                     <h1>
                         {profileName}
-                        <img src={profileImage} alt="imagen de perfil" style={{ width: 50, height: 50, borderRadius: '50%' }} className="mx-3"/> 
+                        <img src={profileImage} alt="imagen de perfil" style={{ width: 50, height: 50, borderRadius: '50%' }} className="mx-3" />
                     </h1>
                 </span>
             </div>
