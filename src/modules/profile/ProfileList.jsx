@@ -39,6 +39,7 @@ export const ProfileList = () => {
 									borderRadius: 2,
 									borderColor: 'primary.main',
 									textAlign: 'center',
+									color: 'primary.main',
 								}}
 							>
 								<h1 className="p-3">Perfiles</h1>

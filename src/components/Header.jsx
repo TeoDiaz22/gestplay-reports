@@ -43,8 +43,8 @@ export const Header = () => {
                         </div>
                         {isAuthenticated ?
                             <div className="position-absolute end-0">
-                                <IconButton className="d-flex align-items-center" onClick={handleSignOut}>
-                                    <span className="fw-semibold p-2 d-none d-lg-block">Cerrar Sesión</span>
+                                <IconButton className="d-flex align-items-center" onClick={handleSignOut} sx={{ color:"primary.main"}}>
+                                    <span className="fw-medium p-2 d-none d-lg-block">Cerrar Sesión</span>
                                     <LogoutIcon className="" />
                                 </IconButton>
                             </div>
