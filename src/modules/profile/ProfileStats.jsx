@@ -5,6 +5,7 @@ import { Button, CircularProgress, FormControl, InputLabel, MenuItem, Select } f
 import { useEffect, useState } from "react";
 import ErrorIcon from '@mui/icons-material/Error';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { Container } from "react-bootstrap";
 import { getClickGameData, getCursorGameData, getProfile } from "../../api/queries.js";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
@@ -40,7 +41,7 @@ export const ProfileStats = () => {
     }, [game, levelId, cursorGameQuery.isLoading, clickGameQuery.isLoading]);
 
     useEffect(() => {
-        if (profileData.isLoading) return;
+        if (profileData.isLoading || profileData.isError) return;
         const { first_name, last_name, image_path } = profileData.data.data;
         setProfileName(`${first_name} ${last_name}`);
         setProfileImage(image_path);
@@ -101,7 +102,11 @@ export const ProfileStats = () => {
                 <span className={"ms-auto"}>
                     <h1>
                         {profileName}
-                        <img src={profileImage} alt="imagen de perfil" style={{ width: 50, height: 50, borderRadius: '50%' }} className="mx-3" />
+                        {profileImage
+                            ? <img src={profileImage} alt="imagen de perfil" style={{ width: 50, height: 50, borderRadius: '50%' }} className="mx-3" />
+                            : <AccountCircleIcon />
+                        }
+
                     </h1>
                 </span>
             </div>
